@@ -224,7 +224,7 @@ git clone https://github.com/Imran2205/Mask2Former-mod
 ```
 Then run the following command
 ```shell
-cd /kaggle/working/Mask2Former-mod/mask2former/modeling/pixel_decoder/ops && sh make.sh
+cd ./Mask2Former-mod/mask2former/modeling/pixel_decoder/ops && sh make.sh
 ```
 In the Mask2Former-mod/mask2former/data/datasets/register_uws.py file change line no 78 and 56 with the path to the semantic segmentation dataset. 
 Now for training run,
@@ -261,12 +261,15 @@ To run the inference in colab [![Open In Colab](https://colab.research.google.co
 ## Citation
 Please consider citing the paper if you find it useful:
 ```
-@inproceedings{,
-  title={},
-  author={},
-  booktitle={},
-  year={}
+@inproceedings{kabir2023few,
+  title={Few-Shot Segmentation and Semantic Segmentation for Underwater Imagery},
+  author={Kabir, Imran and Shaurya, Shubham and Maigur, Vijayalaxmi and Thakurdesai, Nikhil and Latnekar, Mahesh and Raunak, Mayank and Crandall, David and Reza, Md Alimoor},
+  booktitle={2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  pages={11451--11457},
+  year={2023},
+  organization={IEEE}
 }
+
 ```
 
 ---
