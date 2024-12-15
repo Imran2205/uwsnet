@@ -35,14 +35,14 @@ pip install -r requirements.txt
 ---
 
 ## Usage
-Training and testing on our proposed network and other baseline networks can be run very easily using this code.  
+Training and testing on our proposed network and other baseline networks can be run using this repository.  
 
 ### Preparation
 First, download the code and install dependencies. Then download the dataset and put it in the dataset directory.
 
-You can download dataset from [here](https://drive.google.com/file/d/1tmf7179sRqrxIlmJprDpj9h5jcBLA7k1/view?usp=drive_link)
+You can download dataset from [here](https://drive.google.com/file/d/1C9yJldkt5ZKNpUREKwsHuf548FNv7lG5/view?usp=drive_link)
 
-Also download the dataset split files from [here](https://drive.google.com/drive/folders/1IOLhsgBd2ZnVr4I10s8m4PqfP2yzpEbp?usp=drive_link) and put them in dataset_split directory
+Also download the dataset split files from [here](https://drive.google.com/drive/folders/110XuD0-MxsUhSSnfc6RHw57C3oUDHguO?usp=drive_link) and put them in dataset_split directory
 
 
 ### Prepare Config Files
@@ -119,25 +119,25 @@ python3 test.py --config path_to_config_file
 cd tools
 python3 test.py --config ../experiments_inference/eca_net_sup_que_vgg16_config/1_shot/uw_few_shot_training_config_eca_net_sup_que_vgg16_shot_1_split_0.yaml
 ```
-Set `PRETRAINED_MODEL` with the path of trained UWSNet V2. Pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link).
+Set `PRETRAINED_MODEL` with the path of trained UWSNet V2. Pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1Uj4AsIesk6TqY3oV1P_Jshn3V6lxQsYx?usp=drive_link).
 
 #### Example (Test UWSNet V6 for 1 shot on split 1)
 ```
 cd tools
 python3 test.py --config ../experiments_inference/triplet_sup_que_vgg16_dice_config/1_shot/uw_few_shot_training_config_triplet_sup_que_vgg16_dice_shot_1_split_0.yaml
 ```
-Set `PRETRAINED_MODEL` with the path of trained UWSNet V6. Pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link).
+Set `PRETRAINED_MODEL` with the path of trained UWSNet V6. Pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1z7jTvZeeU0uKVb9odjeCz6EiQSxwlqa8?usp=drive_link).
 
 Must set the base architecture (`NAME` under `MODEL`) and type (`PA_NET_TYPE` under `TRAIN`) in config file according to your choice.
 
 To run the inference in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/fewshot_inference.ipynb)
   
 ### Pre-trained models
-- Pre-trained backbones and models can be found in [Google Driver](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link)
-- Download backbones and set the backbone model path. Pretrained backbone can be found [here](https://drive.google.com/drive/folders/15AD86KAKEpySFu8NFNZcPWE_9vmAuGx5?usp=drive_link)
+- Pre-trained models can be found in [Google Driver](https://drive.google.com/drive/folders/1iw01ww7V57IENZtpXlqq_jCZO5ZFe9ZR?usp=drive_link)
+- Download backbones and set the backbone model path. Pretrained backbone can be found [here](https://drive.google.com/drive/folders/1b3cFMaE2bpjH4v-oFo8oJl_VeWfkIBg1?usp=drive_link)
 
 ## Semantic Segmentation
-Under water semantic segmentation dataset is available [here](https://drive.google.com/file/d/1OUw-wFBKCHZiOuVehkOREVP6MTzxKBz9/view?usp=drive_link)
+Under water semantic segmentation dataset is available [here](https://drive.google.com/file/d/1QyW3qSFaa1qj6unG59kXmFl4wpv8OXQv/view?usp=drive_link)
 ### Class Map
 | Sl | Class       | Train Id | Color(r, g, b)  |
 |----|-------------|----------|-----------------|
@@ -189,7 +189,7 @@ cd tools
 python3 python3 train_hrnet_v2_final.py --cfg ../experiments/hrnet/uws_training_hrnet_v2.yaml
 ```
 
-Change `ROOT` (under `DATASET`), `LOG_DIR`, `OUTPUT_DIR`, `PRETRAINED` (under `MODEL`) in the config file according to your file structure. Download the imagenet pretrained file from [here](https://drive.google.com/file/d/1B4Xh2rhIGe8oMQtOd2znNsc3oIb32lu8/view?usp=drive_link)
+Change `ROOT` (under `DATASET`), `LOG_DIR`, `OUTPUT_DIR`, `PRETRAINED` (under `MODEL`) in the config file according to your file structure. Download the imagenet pretrained file from [here](https://drive.google.com/drive/folders/1nov3qZHc-fL6gGJlHRHcamtcqLsNe09J?usp=drive_link)
 
 To run the training in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_hrnet_v2_train.ipynb)
 
@@ -199,7 +199,7 @@ To test HRNet V2 model, first, specify `MODEL_FILE` (under `TEST`). Then run the
     --cfg ./uwsnet/experiments/hrnet/uws_training_hrnet_v2_test.yaml
 ```
 
-Download the best model from [here](https://drive.google.com/drive/folders/1OQ8IHdf1wYZGoCVoDl_Y0i3rqPQvRnuu?usp=drive_link). 
+Download the best model from [here](https://drive.google.com/drive/folders/1GHRhG_j7CbL4jXbYp6Eg-U0ziEzwHODA?usp=drive_link). 
 
 To run the inference in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_hrnet_v2_inference.ipynb)
 
@@ -251,7 +251,7 @@ python3 ./Mask2Former-mod/train_net.py --num-gpus 1 --config-file \
     --eval-only MODEL.WEIGHTS /content/Mask2Former/model_final.pth
 ```
 
-Pretrained models are available [here](https://drive.google.com/drive/folders/1OQ8IHdf1wYZGoCVoDl_Y0i3rqPQvRnuu?usp=drive_link).
+Pretrained models are available [here](https://drive.google.com/drive/folders/16l8dewIHFn17K6pCCmsA8U0yZqAn9-ys?usp=drive_link).
 
 To run the inference in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_mask2former_inference.ipynb)
 

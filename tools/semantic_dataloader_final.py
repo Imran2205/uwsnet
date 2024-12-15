@@ -114,7 +114,7 @@ class UWFSDataLoader(torch.utils.data.Dataset):
 
 
 class UWFSDataLoaderVal(torch.utils.data.Dataset):
-    def __init__(self, base_size, crop_size, multi_scale, output_image_height=700, images=None,
+    def __init__(self, base_size, crop_size, multi_scale=None, output_image_height=700, images=None,
                  masks=None, normalizer=None, channel_values=None):
         self.output_image_height = output_image_height
         self.images = images

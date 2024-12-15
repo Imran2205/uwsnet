@@ -23,7 +23,7 @@ from core.function import validate, testval, test
 from utils.hrnet_v2_utils.utils import create_logger, FullModel
 from utils.hrnet_utils.normalization_utils import get_imagenet_mean_std
 from semantic_dataloader import UWFSDataLoader
-from semantic_dataloader_final import UWFSDataLoader as UWFSDataLoader2
+from semantic_dataloader_final import UWFSDataLoaderVal as UWFSDataLoader2
 from utils.hrnet_utils import transform
 from tqdm import tqdm
 from scipy.io import loadmat
@@ -85,19 +85,6 @@ def main():
     mean, std = get_imagenet_mean_std()
 
     if config.DATASET.DATASET == 'UWS3':
-        train_transform_list = [
-            transform.ResizeShort(config.TRAIN.IMAGE_SIZE[0]),
-            transform.Crop(
-                [config.TRAIN.IMAGE_SIZE[0], config.TRAIN.IMAGE_SIZE[1]],
-                crop_type="rand",
-                padding=mean,
-                ignore_label=config.TRAIN.IGNORE_LABEL,
-            ),
-            transform.ToTensor(),
-            transform.Normalize(mean=mean, std=std),
-        ]
-        # transform.ResizeTest((config.TRAIN.TRAIN_H, config.TRAIN.TRAIN_W)),
-        # transform.ResizeShort(config.TRAIN.SHORT_SIZE),
         val_transform_list = [
             transform.ResizeShort(config.TRAIN.IMAGE_SIZE[0]),
             transform.Crop(
@@ -110,92 +97,7 @@ def main():
             transform.Normalize(mean=mean, std=std),
         ]
 
-        train_dir = config.DATASET.TRAIN_SET
         val_dir = config.DATASET.TEST_SET
-
-        images_files = glob.glob(
-            os.path.join(
-                config.DATASET.ROOT,
-                train_dir,
-                'images',
-                '*.png'
-            )
-        )
-        masks_files = \
-            [os.path.join(config.DATASET.ROOT, train_dir, 'labels', os.path.basename(m_i)) for m_i in images_files]
-
-        images = []
-        masks = []
-
-        for i_i_fl, img_fl in enumerate(tqdm(images_files)):
-            images.append(np.array(
-                Image.open(img_fl)
-            ))
-            masks.append(np.array(
-                Image.open(masks_files[i_i_fl])
-            ))
-
-        dataset_len = len(images)
-        logger.info(f'Total train image files: {dataset_len}')
-        np.random.seed(0)
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 2))
-        for i in rand_n:
-            im = images[i]
-            target = masks[i]
-            # perform horizontal flip
-            images.append(np.fliplr(im))
-            masks.append(np.fliplr(target))
-
-        # shift right
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 4))
-        for i in rand_n:
-            shift = 20
-            im = images[i]
-            target = masks[i]
-
-            im[:, shift:] = im[:, :-shift]
-            target[:, shift:] = target[:, :-shift]
-            images.append(im)
-            masks.append(target)
-
-        # shift left
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 4))
-        for i in rand_n:
-            shift = 20
-            im = images[i]
-            target = masks[i]
-
-            im[:, :-shift] = im[:, shift:]
-            target[:, :-shift] = target[:, shift:]
-            images.append(im)
-            masks.append(target)
-
-        # shift up
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 4))
-        for i in rand_n:
-            shift = 20
-            im = images[i]
-            target = masks[i]
-
-            im[:-shift, :] = im[shift:, :]
-            target[:-shift, :] = target[shift:, :]
-            images.append(im)
-            masks.append(target)
-
-        # shift down
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 4))
-        for i in rand_n:
-            shift = 20
-            im = images[i]
-            target = masks[i]
-
-            im[shift:, :] = im[:-shift, :]
-            target[shift:, :] = target[:-shift, :]
-            images.append(im)
-            masks.append(target)
-
-        images_train = images
-        masks_train = masks
 
         images_files = glob.glob(
             os.path.join(
@@ -224,34 +126,6 @@ def main():
 
         test_size = (config.TEST.IMAGE_SIZE[1], config.TEST.IMAGE_SIZE[0])
 
-        # train_dataset = UWFSDataLoader2(
-        #     base_size=config.TEST.BASE_SIZE,
-        #     crop_size=test_size,
-        #     multi_scale=False,
-        #     output_image_height=config.TRAIN.IMAGE_SIZE[0],
-        #     images=images_train,
-        #     masks=masks_train,
-        #     normalizer=transform.Compose(train_transform_list),
-        #     channel_values=None
-        # )
-        # val_dataset = UWFSDataLoader2(
-        #     base_size=config.TEST.BASE_SIZE,
-        #     crop_size=test_size,
-        #     multi_scale=False,
-        #     output_image_height=config.TRAIN.IMAGE_SIZE[0],
-        #     images=images_test,
-        #     masks=masks_test,
-        #     normalizer=transform.Compose(val_transform_list),
-        #     channel_values=None
-        # )
-
-        train_dataset = UWFSDataLoader2(
-            output_image_height=config.TRAIN.IMAGE_SIZE[0],
-            images=images_train,
-            masks=masks_train,
-            normalizer=transform.Compose(train_transform_list),
-            channel_values=None
-        )
         val_dataset = UWFSDataLoader2(
             output_image_height=config.TRAIN.IMAGE_SIZE[0],
             images=images_test,
@@ -264,18 +138,6 @@ def main():
         val_dataset = None
         logger.info("=> no dataset found. " 'Exiting...')
         exit()
-
-    train_sampler = None
-    train_loader = torch.utils.data.DataLoader(
-        train_dataset,
-        batch_size=batch_size,
-        shuffle=(train_sampler is None),
-        num_workers=config.WORKERS,
-        pin_memory=True,
-        sampler=train_sampler,
-        drop_last=True
-    )
-    logger.info(f'Train loader has len: {len(train_loader)}')
 
     val_sampler = None
     val_loader = torch.utils.data.DataLoader(
@@ -367,8 +229,10 @@ def main():
 
     start = timeit.default_timer()
 
-    valid_loss, mean_IoU, IoU_array = validate(config,
-                                               val_loader, model, writer_dict)
+    valid_loss, mean_IoU, IoU_array = testval(config,
+                                              val_dataset,
+                                              val_loader,
+                                              model, sv_pred=True, sv_dir='')
 
     msg = 'Loss: {:.3f}, MeanIU: {: 4.4f}'.format(
         valid_loss, mean_IoU)
