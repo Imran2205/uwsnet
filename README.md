@@ -1,6 +1,6 @@
 # Few\-shot segmentation and Semantic Segmentation for Underwater Imagery
 This code is for the paper "Few-shot segmentation and Semantic Segmentation for Underwater
-Imagery" (accepted to IROS2023) [[arxiv]()]
+Imagery" (accepted to IROS2023) [[Link](https://ieeexplore.ieee.org/document/10342227)]
 
 Our proposed network architecture for few-shot segmentation
 <p align="left">
