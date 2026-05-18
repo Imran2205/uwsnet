@@ -51,7 +51,7 @@ class UWFSDataLoader(torch.utils.data.Dataset):
                 24: {'name': 'water',       'train_id': 23,  'color': (180, 165, 180)},
                 25: {'name': 'sand',        'train_id': 24,  'color': (150, 100, 100)},
                 26: {'name': 'plant',       'train_id': 25,  'color': (150, 120, 90)},
-                27: {'name': 'human',       'train_id': 26,  'color': (153, 153, 153)},
+                27: {'name': 'human',       'train_id': 26,  'color': (153, 153, 0)},
                 28: {'name': 'reef',        'train_id': 27,  'color': (0,   0,   110)},
                 29: {'name': 'others',      'train_id': 28,  'color': (47,  220, 70)}
             }
