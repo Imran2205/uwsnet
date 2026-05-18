@@ -168,7 +168,7 @@ Under water semantic segmentation dataset is available [here](https://drive.goog
 | 25 | water       | 23       | (180, 165, 180) |
 | 26 | sand        | 24       | (150, 100, 100) |
 | 27 | plant       | 25       | (150, 120, 90)  |
-| 28 | human       | 26       | (153, 153, 153) |
+| 28 | human       | 26       | (153, 153, 0)   |
 | 29 | reef        | 27       | (0,   0,   110) |
 | 30 | others      | 28       | (47,  220, 70)  |
 
