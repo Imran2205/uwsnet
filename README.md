@@ -137,7 +137,7 @@ To run the inference in colab [![Open In Colab](https://colab.research.google.co
 - Download backbones and set the backbone model path. Pretrained backbone can be found [here](https://drive.google.com/drive/folders/1b3cFMaE2bpjH4v-oFo8oJl_VeWfkIBg1?usp=drive_link)
 
 ## Semantic Segmentation
-Under water semantic segmentation dataset is available [here](https://drive.google.com/file/d/1QyW3qSFaa1qj6unG59kXmFl4wpv8OXQv/view?usp=drive_link)
+Under water semantic segmentation dataset is available [here](https://drive.google.com/file/d/1Dj-VP-87r5ZpxKFYXbA2KuERJ_X9KsSB/view?usp=drive_link)
 ### Class Map
 | Sl | Class       | Train Id | Color(r, g, b)  |
 |----|-------------|----------|-----------------|
